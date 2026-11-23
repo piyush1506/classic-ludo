@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Ludo King</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= LOBBY / MAIN MENU ================= -->
+  <div id="lobby-screen" class="screen active">
+    <!-- Top Bar -->
+    <header class="lobby-header">
+      <div class="user-profile" id="btn-profile">
+        <div class="avatar-ring">
+          <div class="avatar-img-wrap">👑</div>
+          <span class="lvl-badge">7</span>
+        </div>
+        <div class="user-meta">
+          <div class="user-flag-row">
+            <span class="flag-icon" id="user-flag">🇮🇳</span>
+            <span class="user-name" id="lobby-username">Rohan J.</span>
+          </div>
+          <span class="user-title">👑 Pro Champion</span>
+        </div>
+      </div>
+
+      <div class="currency-group">
+        <div class="currency-pill coin-pill">
+          <span class="curr-icon">💰</span>
+          <span class="curr-val" id="user-coins">12,395</span>
+          <button class="add-curr-btn">+</button>
+        </div>
+        <div class="currency-pill gem-pill">
+          <span class="curr-icon">💎</span>
+          <span class="curr-val" id="user-gems">798</span>
+          <button class="add-curr-btn">+</button>
+        </div>
+      </div>
+
+      <button class="icon-btn-gold" id="btn-settings" aria-label="Settings">⚙️</button>
+    </header>
+
+    <!-- Main Branding -->
+    <div class="hero-brand">
+      <div class="crown-icon">👑</div>
+      <h1 class="game-logo">LUDO <span class="logo-gold">KING</span></h1>
+      <p class="logo-tagline">THE ULTIMATE REALTIME BOARD GAME</p>
+    </div>
+
+    <!-- Game Mode Cards Grid -->
+    <div class="mode-grid">
+      <!-- 1. ONLINE MULTIPLAYER (FEATURED) -->
+      <button class="mode-card card-online featured-card" id="btn-mode-online">
+        <div class="card-badge pulse-badge">LIVE ⚡</div>
+        <div class="card-icon">🌐</div>
+        <div class="card-text">
+          <h3>PLAY ONLINE</h3>
+          <p>Realtime Matchmaking with Online Players</p>
+        </div>
+        <span class="card-arrow">▶</span>
+      </button>
+
+      <!-- 2. VS COMPUTER -->
+      <button class="mode-card card-ai" id="btn-mode-computer">
+        <div class="card-icon">🤖</div>
+        <div class="card-text">
+          <h3>VS COMPUTER</h3>
+          <p>Practice Offline with Smart AI</p>
+        </div>
+        <span class="card-arrow">▶</span>
+      </button>
+
+      <!-- 3. PASS N PLAY -->
+      <button class="mode-card card-local" id="btn-mode-local">
+        <div class="card-icon">👥</div>
+        <div class="card-text">
+          <h3>PASS N PLAY</h3>
+          <p>2 to 4 Players on Same Device</p>
+        </div>
+        <span class="card-arrow">▶</span>
+      </button>
+
+      <!-- 4. MINI GAMES ROW -->
+      <div class="mini-games-row">
+        <button class="mini-card card-spin" id="btn-mode-spin">
+          <span class="mini-icon">🎡</span>
+          <span class="mini-label">Lucky Wheel</span>
+        </button>
+        <button class="mini-card card-seven" id="btn-mode-seven">
+          <span class="mini-icon">🎲</span>
+          <span class="mini-label">7 Up 7 Down</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lobby Footer -->
+    <footer class="lobby-footer">
+      <button class="footer-btn" id="btn-sound-toggle">🔊 Sound: ON</button>
+      <button class="footer-btn" id="btn-rules">📜 Rules</button>
+    </footer>
+  </div>
+
+
+  <!-- ================= MATCHMAKING RADAR SCREEN ================= -->
+  <div id="matchmaking-screen" class="screen">
+    <div class="radar-container">
+      <h2 class="radar-title">SEARCHING FOR OPPONENTS</h2>
+      <p class="radar-subtitle" id="mm-status-txt">Connecting to online players...</p>
+
+      <!-- Radar Animation Box -->
+      <div class="radar-circle-wrap">
+        <div class="radar-sweep"></div>
+        <div class="radar-ping"></div>
+        <div class="radar-center-logo">👑</div>
+      </div>
+
+      <!-- 4 Matchmaking Player Slots -->
+      <div class="mm-slots-grid" id="mm-slots-container">
+        <!-- Slot 0: You -->
+        <div class="mm-slot ready" id="mm-slot-0">
+          <div class="mm-avatar">👑</div>
+          <span class="mm-flag">🇮🇳</span>
+          <span class="mm-name" id="mm-name-0">You</span>
+          <span class="mm-badge">READY</span>
+        </div>
+
+        <!-- Slot 1 -->
+        <div class="mm-slot" id="mm-slot-1">
+          <div class="mm-avatar spinner-avatar">?</div>
+          <span class="mm-flag">--</span>
+          <span class="mm-name" id="mm-name-1">Searching...</span>
+          <span class="mm-badge">WAITING</span>
+        </div>
+
+        <!-- Slot 2 -->
+        <div class="mm-slot" id="mm-slot-2">
+          <div class="mm-avatar spinner-avatar">?</div>
+          <span class="mm-flag">--</span>
+          <span class="mm-name" id="mm-name-2">Searching...</span>
+          <span class="mm-badge">WAITING</span>
+        </div>
+
+        <!-- Slot 3 -->
+        <div class="mm-slot" id="mm-slot-3">
+          <div class="mm-avatar spinner-avatar">?</div>
+          <span class="mm-flag">--</span>
+          <span class="mm-name" id="mm-name-3">Searching...</span>
+          <span class="mm-badge">WAITING</span>
+        </div>
+      </div>
+
+      <button class="btn-cancel" id="btn-cancel-matchmaking" style="margin-top:24px; font-size:16px;">Cancel Search</button>
+    </div>
+  </div>
+
+
+  <!-- ================= IN-GAME ARENA SCREEN ================= -->
+  <div id="game-screen" class="screen">
+    <!-- Top Game Bar -->
+    <div class="game-header">
+      <button class="game-nav-btn" id="btn-game-exit">⬅ Exit</button>
+      <div class="pot-badge">
+        <span class="pot-label">PRIZE POT</span>
+        <span class="pot-amount" id="pot-display">💰 2,000</span>
+      </div>
+      <button class="game-nav-btn" id="btn-game-sound">🔊</button>
+    </div>
+
+    <!-- Active Turn Status Bar -->
+    <div id="game-status-bar">
+      <span id="game-status-msg">Tap dice to roll</span>
+    </div>
+
+    <!-- 4 Player Corners & Ludo Board Area -->
+    <div class="game-arena">
+      <!-- TOP PLAYERS ROW -->
+      <div class="players-row top-row">
+        <!-- TOP-LEFT: RED (panel-0) -->
+        <div class="player-panel panel-red" id="panel-0">
+          <div class="p-flag-badge" id="flag-0">🇮🇳 India</div>
+          <div class="p-panel-body">
+            <div class="p-avatar-wrap">
+              <svg class="timer-ring" viewBox="0 0 44 44">
+                <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                <circle class="ring-bar" id="ring-0" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <div class="p-avatar" style="background:#e53935;" id="avatar-0">👨</div>
+              <div class="reaction-bubble" id="bubble-0"></div>
+            </div>
+            <div class="p-info">
+              <span class="p-name" id="name-0">Aravind</span>
+              <span class="p-coins" id="coins-0">💰 17,450</span>
+              <span class="p-tokens" id="tokens-home-0">Home: 0/4</span>
+            </div>
+            <div class="p-dice-box" id="dice-box-0">
+              <div class="mini-dice" id="cube-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOP-RIGHT: GREEN (panel-1) -->
+        <div class="player-panel panel-green" id="panel-1">
+          <div class="p-flag-badge" id="flag-1">🇮🇳 India</div>
+          <div class="p-panel-body">
+            <div class="p-dice-box" id="dice-box-1">
+              <div class="mini-dice" id="cube-1"></div>
+            </div>
+            <div class="p-info">
+              <span class="p-name" id="name-1">Surya Reddy</span>
+              <span class="p-coins" id="coins-1">💰 19,178</span>
+              <span class="p-tokens" id="tokens-home-1">Home: 0/4</span>
+            </div>
+            <div class="p-avatar-wrap">
+              <svg class="timer-ring" viewBox="0 0 44 44">
+                <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                <circle class="ring-bar" id="ring-1" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <div class="p-avatar" style="background:#2e7d32;" id="avatar-1">🌻</div>
+              <div class="reaction-bubble" id="bubble-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE LUDO BOARD -->
+      <div id="board-wrap">
+        <div id="board">
+          <!-- Dynamically filled with cells, bases, tokens -->
+        </div>
+      </div>
+
+      <!-- BOTTOM PLAYERS ROW -->
+      <div class="players-row bottom-row">
+        <!-- BOTTOM-LEFT: BLUE (panel-3) -->
+        <div class="player-panel panel-blue" id="panel-3">
+          <div class="p-flag-badge" id="flag-3">🇮🇳 India</div>
+          <div class="p-panel-body">
+            <div class="p-avatar-wrap">
+              <svg class="timer-ring" viewBox="0 0 44 44">
+                <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                <circle class="ring-bar" id="ring-3" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <div class="p-avatar" style="background:#1565c0;" id="avatar-3">👑</div>
+              <div class="reaction-bubble" id="bubble-3"></div>
+            </div>
+            <div class="p-info">
+              <span class="p-name" id="name-3">Rohanjakhade</span>
+              <span class="p-coins" id="coins-3">💰 12,395</span>
+              <span class="p-tokens" id="tokens-home-3">Home: 0/4</span>
+            </div>
+            <div class="p-dice-box" id="dice-box-3">
+              <div class="mini-dice" id="cube-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM-RIGHT: YELLOW (panel-2) -->
+        <div class="player-panel panel-yellow" id="panel-2">
+          <div class="p-flag-badge" id="flag-2">🇺🇸 USA</div>
+          <div class="p-panel-body">
+            <div class="p-dice-box" id="dice-box-2">
+              <div class="mini-dice" id="cube-2"></div>
+            </div>
+            <div class="p-info">
+              <span class="p-name" id="name-2">Queen B</span>
+              <span class="p-coins" id="coins-2">💰 60,473</span>
+              <span class="p-tokens" id="tokens-home-2">Home: 0/4</span>
+            </div>
+            <div class="p-avatar-wrap">
+              <svg class="timer-ring" viewBox="0 0 44 44">
+                <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                <circle class="ring-bar" id="ring-2" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <div class="p-avatar" style="background:#fbc02d;" id="avatar-2">👩</div>
+              <div class="reaction-bubble" id="bubble-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IN-GAME FLOATING REACTION EMOJIS BAR -->
+      <div class="reactions-bar">
+        <button class="emoji-btn" data-emoji="👑" title="King">👑</button>
+        <button class="emoji-btn" data-emoji="😂" title="Laugh">😂</button>
+        <button class="emoji-btn" data-emoji="🔥" title="Fire">🔥</button>
+        <button class="emoji-btn" data-emoji="👍" title="Thumbs Up">👍</button>
+        <button class="emoji-btn" data-emoji="😢" title="Sad">😢</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= PLAY ONLINE OPTIONS MODAL ================= -->
+  <div id="modal-online" class="modal-overlay">
+    <div class="modal-card online-card">
+      <h2 class="modal-title">🌐 PLAY ONLINE</h2>
+      
+      <!-- Sub tabs -->
+      <div class="seg-ctrl" id="online-tabs">
+        <button class="seg-btn active" data-tab="tab-quick">Quick Match</button>
+        <button class="seg-btn" data-tab="tab-create">Create Room</button>
+        <button class="seg-btn" data-tab="tab-join">Join Room</button>
+      </div>
+
+      <!-- Tab 1: Quick Match -->
+      <div class="online-tab-content active" id="tab-quick">
+        <p class="modal-subtitle" style="margin-top:6px;">Auto-matches with real players (or smart bots)</p>
+        <div class="modal-section" style="margin-top:12px;">
+          <label>Select Mode:</label>
+          <div class="seg-ctrl" id="seg-quick-players">
+            <button data-val="2" class="seg-btn">2 Players</button>
+            <button data-val="4" class="seg-btn active">4 Players</button>
+          </div>
+        </div>
+        <div class="modal-section" style="margin-top:10px;">
+          <label>Entry Fee:</label>
+          <div class="bet-row">
+            <button class="bet-chip active" data-bet="500">💰 500</button>
+            <button class="bet-chip" data-bet="1000">💰 1,000</button>
+            <button class="bet-chip" data-bet="2500">💰 2,500</button>
+          </div>
+        </div>
+        <button class="btn-gold" id="btn-start-quick" style="margin-top:16px; width:100%;">FIND MATCH NOW</button>
+      </div>
+
+      <!-- Tab 2: Create Private Room -->
+      <div class="online-tab-content" id="tab-create" style="display:none;">
+        <p class="modal-subtitle" style="margin-top:6px;">Invite your friends via Room Code</p>
+        <div class="modal-section" style="margin-top:12px;">
+          <label>Max Players:</label>
+          <div class="seg-ctrl" id="seg-create-players">
+            <button data-val="2" class="seg-btn">2</button>
+            <button data-val="3" class="seg-btn">3</button>
+            <button data-val="4" class="seg-btn active">4</button>
+          </div>
+        </div>
+        <div class="modal-section" style="margin-top:10px;">
+          <label>Bet Coins:</label>
+          <div class="bet-row">
+            <button class="bet-chip active" data-bet="500">💰 500</button>
+            <button class="bet-chip" data-bet="1000">💰 1,000</button>
+            <button class="bet-chip" data-bet="2500">💰 2,500</button>
+          </div>
+        </div>
+        <button class="btn-gold" id="btn-create-room" style="margin-top:16px; width:100%;">CREATE ROOM</button>
+      </div>
+
+      <!-- Tab 3: Join Room -->
+      <div class="online-tab-content" id="tab-join" style="display:none;">
+        <p class="modal-subtitle" style="margin-top:6px;">Enter 4-character Room Code</p>
+        <input type="text" id="input-room-code" maxlength="4" placeholder="e.g. A7X9" style="text-transform:uppercase; font-size:24px; font-weight:900; letter-spacing:6px; text-align:center; padding:12px; border-radius:12px; border:2px solid #ffd700; background:#000; color:#fff; width:100%; margin:14px 0;">
+        <button class="btn-gold" id="btn-join-room" style="width:100%;">JOIN ROOM</button>
+      </div>
+
+      <!-- Room Waiting Lobby View -->
+      <div class="online-tab-content" id="tab-room-lobby" style="display:none;">
+        <h3 style="color:#ffd700; font-size:16px;">ROOM CODE: <span id="display-room-code" style="color:#fff; background:#000; padding:4px 14px; border-radius:8px; border:1px solid #ffd700; font-weight:900;">----</span></h3>
+        <p style="font-size:12px; color:#bbb; margin:6px 0;">Share code with your friends</p>
+        <div id="room-player-list" style="display:flex; flex-direction:column; gap:6px; margin:10px 0; max-height:140px; overflow-y:auto; background:rgba(0,0,0,0.3); padding:8px; border-radius:8px;">
+        </div>
+        <button class="btn-gold" id="btn-start-room-match" style="display:none; width:100%;">START MATCH</button>
+        <p id="room-waiting-txt" style="font-size:13px; color:#ffca28;">Waiting for friends to join...</p>
+      </div>
+
+      <button class="btn-cancel" id="btn-close-online" style="margin-top:10px;">Close</button>
+    </div>
+  </div>
+
+
+  <!-- ================= PASS N PLAY & VS COMPUTER MODAL ================= -->
+  <div id="modal-mode" class="modal-overlay">
+    <div class="modal-card">
+      <h2 id="modal-mode-title" class="modal-title">VS COMPUTER</h2>
+      
+      <div class="modal-section">
+        <label>Select Players:</label>
+        <div class="seg-ctrl" id="seg-players">
+          <button data-val="2" class="seg-btn active">2 Players</button>
+          <button data-val="3" class="seg-btn">3 Players</button>
+          <button data-val="4" class="seg-btn">4 Players</button>
+        </div>
+      </div>
+
+      <div class="modal-section" id="sec-your-color">
+        <label>Choose Your Color:</label>
+        <div class="color-picker-row">
+          <button class="col-pick active" data-color="0" style="background:#e53935;">Red</button>
+          <button class="col-pick" data-color="1" style="background:#2e7d32;">Green</button>
+          <button class="col-pick" data-color="2" style="background:#fbc02d; color:#222;">Yellow</button>
+          <button class="col-pick" data-color="3" style="background:#1565c0;">Blue</button>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <label>Bet Amount:</label>
+        <div class="bet-row">
+          <button class="bet-chip active" data-bet="500">💰 500</button>
+          <button class="bet-chip" data-bet="1000">💰 1,000</button>
+          <button class="bet-chip" data-bet="2500">💰 2,500</button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-gold" id="btn-start-match">START MATCH</button>
+        <button class="btn-cancel" id="btn-close-mode">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= LUCKY SPIN WHEEL MODAL ================= -->
+  <div id="modal-spin" class="modal-overlay">
+    <div class="modal-card spin-card">
+      <h2 class="modal-title">🎡 LUCKY SPIN WHEEL</h2>
+      <p class="modal-subtitle">Spin to win Coins & Gems!</p>
+      
+      <div class="wheel-outer">
+        <div class="wheel-pointer">▼</div>
+        <canvas id="wheel-canvas" width="280" height="280"></canvas>
+      </div>
+
+      <button class="btn-gold" id="btn-spin-wheel">SPIN NOW</button>
+      <button class="btn-cancel" id="btn-close-spin">Close</button>
+    </div>
+  </div>
+
+
+  <!-- ================= 7 UP 7 DOWN MINI GAME ================= -->
+  <div id="modal-seven" class="modal-overlay">
+    <div class="modal-card seven-card">
+      <h2 class="modal-title">🎲 7 UP 7 DOWN</h2>
+      <p class="modal-subtitle">Predict the dice sum!</p>
+
+      <div class="seven-dice-stage">
+        <div class="seven-die" id="sd-1">1</div>
+        <div class="seven-die" id="sd-2">6</div>
+      </div>
+      <div id="seven-result" class="seven-result">Sum: 7</div>
+
+      <div class="seven-bet-grid">
+        <button class="seven-box" data-target="down">
+          <span class="box-head">7 DOWN</span>
+          <span class="box-sub">2, 3, 4, 5, 6</span>
+          <span class="box-rate">2X PAYOUT</span>
+        </button>
+
+        <button class="seven-box lucky7" data-target="seven">
+          <span class="box-head">LUCKY 7</span>
+          <span class="box-sub">Exact 7</span>
+          <span class="box-rate">3X PAYOUT</span>
+        </button>
+
+        <button class="seven-box" data-target="up">
+          <span class="box-head">7 UP</span>
+          <span class="box-sub">8, 9, 10, 11, 12</span>
+          <span class="box-rate">2X PAYOUT</span>
+        </button>
+      </div>
+
+      <div class="seven-bet-select">
+        <span>Bet:</span>
+        <button class="chip-btn active" data-amt="100">100</button>
+        <button class="chip-btn" data-amt="500">500</button>
+        <button class="chip-btn" data-amt="1000">1000</button>
+      </div>
+
+      <button class="btn-gold" id="btn-roll-seven">ROLL DICE</button>
+      <button class="btn-cancel" id="btn-close-seven">Close</button>
+    </div>
+  </div>
+
+
+  <!-- ================= WINNER / CELEBRATION MODAL ================= -->
+  <div id="modal-win" class="modal-overlay">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="modal-card win-card">
+      <div class="trophy-wrap">
+        <div class="trophy-rays"></div>
+        <div class="trophy-icon">🏆</div>
+      </div>
+      <h1 class="win-title" id="win-player-name">RED WINS!</h1>
+      <p class="win-coins" id="win-prize-txt">+2,000 Coins Won!</p>
+
+      <div class="modal-actions">
+        <button class="btn-gold" id="btn-play-again">PLAY AGAIN</button>
+        <button class="btn-cancel" id="btn-win-home">MAIN MENU</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= SETTINGS MODAL ================= -->
+  <div id="modal-settings" class="modal-overlay">
+    <div class="modal-card">
+      <h2 class="modal-title">⚙️ SETTINGS</h2>
+      <div class="setting-row">
+        <span>Sound Effects</span>
+        <input type="checkbox" id="chk-sound" checked>
+      </div>
+      <div class="setting-row">
+        <span>Vibration / Haptics</span>
+        <input type="checkbox" id="chk-vib" checked>
+      </div>
+      <div class="setting-row">
+        <span>Player Name</span>
+        <input type="text" id="input-edit-name" value="Rohan J." maxlength="12" style="padding:6px 10px; border-radius:6px; border:1px solid #999; width:120px; font-weight:bold;">
+      </div>
+      <button class="btn-gold" id="btn-save-settings" style="margin-top:15px;">SAVE & CLOSE</button>
+    </div>
+  </div>
+
+
+  <!-- SCRIPTS -->
+  <script src="js/socket.io.min.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/multiplayer.js"></script>
+</body>
+</html>
