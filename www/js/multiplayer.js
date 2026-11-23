@@ -9,10 +9,7 @@ let roomMaxPlayers = 4;
 
 function getServerUrl() {
   if (window.LUDO_SERVER_URL) return window.LUDO_SERVER_URL;
-  if (window.location.protocol.startsWith('http')) {
-    return `${window.location.protocol}//${window.location.hostname}:3000`;
-  }
-  return 'http://localhost:3000';
+  return 'https://classic-ludo.onrender.com';
 }
 
 function initSocket() {

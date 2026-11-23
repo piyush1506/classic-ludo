@@ -5,13 +5,11 @@ let onlineRoomCode = null;
 let myOnlineColor = 0;
 let isRoomHost = false;
 let roomPlayersList = [];
+let roomMaxPlayers = 4;
 
 function getServerUrl() {
   if (window.LUDO_SERVER_URL) return window.LUDO_SERVER_URL;
-  if (window.location.protocol.startsWith('http')) {
-    return `${window.location.protocol}//${window.location.hostname}:3000`;
-  }
-  return 'http://localhost:3000';
+  return 'https://classic-ludo.onrender.com';
 }
 
 function initSocket() {
@@ -32,8 +30,9 @@ function initSocket() {
 
     socket.on('player_list_updated', (data) => {
       roomPlayersList = data.players || [];
+      if (data.maxPlayers) roomMaxPlayers = data.maxPlayers;
       renderLobbyPlayers(roomPlayersList);
-      renderMatchmakingSlots(roomPlayersList);
+      renderMatchmakingSlots(roomPlayersList, roomMaxPlayers);
     });
 
     socket.on('game_started', (data) => {
@@ -118,13 +117,19 @@ function renderLobbyPlayers(players) {
 }
 
 // Render Matchmaking Slots in Radar View
-function renderMatchmakingSlots(players) {
+function renderMatchmakingSlots(players, maxCount = 4) {
   const slotsGrid = $('#mm-slots-container');
   if (!slotsGrid) return;
 
+  const totalSlots = maxCount || 4;
   for (let i = 0; i < 4; i++) {
     const slot = $(`#mm-slot-${i}`);
     if (!slot) continue;
+    if (i >= totalSlots) {
+      slot.style.display = 'none';
+      continue;
+    }
+    slot.style.display = 'flex';
     const p = players[i];
     if (p) {
       slot.className = 'mm-slot ready';
@@ -146,11 +151,12 @@ function renderMatchmakingSlots(players) {
 async function onOnlineGameStarted(data) {
   isOnlineMatch = true;
   activePlayers = data.activeColors || [0, 1, 2, 3];
+  numPlayers = activePlayers.length;
   isVsComputer = false;
-  potAmount = data.pot || 2000;
+  potAmount = data.pot || (500 * numPlayers);
   roomPlayersList = data.players || [];
 
-  renderMatchmakingSlots(roomPlayersList);
+  renderMatchmakingSlots(roomPlayersList, numPlayers);
   const mmStatus = $('#mm-status-txt');
   if (mmStatus) mmStatus.textContent = 'Match Found! Launching Board...';
 
@@ -318,8 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
       name: userState.name,
       avatar: '👑',
       flag: '🇮🇳'
-    }]);
-    $('#mm-status-txt').textContent = 'Searching for online players...';
+    }], quickPlayersCount);
+    $('#mm-status-txt').textContent = `Searching for ${quickPlayersCount}-Player online match...`;
 
     s.emit('quick_match', {
       name: userState.name,
@@ -331,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onlineRoomCode = res.roomCode;
         myOnlineColor = res.yourColor;
         isRoomHost = res.yourColor === 0;
-        renderMatchmakingSlots(res.players);
+        renderMatchmakingSlots(res.players, quickPlayersCount);
       }
     });
   };
