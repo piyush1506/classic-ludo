@@ -1305,3 +1305,112 @@ html, body {
   accent-color: #ff9800;
   cursor: pointer;
 }
+
+/* ================= AUTHENTICATION MODAL STYLES ================= */
+.auth-modal-card {
+  width: min(92vw, 380px);
+  padding: 24px 20px;
+}
+
+.auth-header-icon {
+  font-size: 38px;
+  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.7));
+  margin-top: -6px;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  background: #ffffff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 24px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-google:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.btn-google:active {
+  transform: scale(0.97);
+}
+
+.google-bonus-chip {
+  margin-top: 14px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px dashed #ffd700;
+  color: #ffd700;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.auth-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.auth-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.avatar-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.avatar-choice-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 24px;
+  padding: 6px 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.avatar-choice-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.avatar-choice-btn.selected {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.25);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+

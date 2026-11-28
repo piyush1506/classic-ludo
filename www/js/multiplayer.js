@@ -17,15 +17,22 @@ function initSocket() {
   const url = getServerUrl();
   console.log('[Multiplayer] Connecting to:', url);
 
+  const authUser = typeof Auth !== 'undefined' && Auth.currentUser ? Auth.currentUser : null;
+  const token = typeof Auth !== 'undefined' ? Auth.token : localStorage.getItem('lk_auth_token');
+  const userId = authUser ? authUser.id : (localStorage.getItem('lk_user_id') || localStorage.getItem('lk_guest_id'));
+  const name = authUser ? authUser.username : (typeof userState !== 'undefined' ? userState.name : 'Player');
+  const avatar = authUser ? authUser.avatar : '👑';
+
   try {
     socket = io(url, {
       transports: ['websocket', 'polling'],
       reconnectionAttempts: 5,
-      timeout: 10000
+      timeout: 10000,
+      auth: { token, userId, name, avatar }
     });
 
     socket.on('connect', () => {
-      console.log('[Multiplayer] Connected! ID:', socket.id);
+      console.log('[Multiplayer] Connected! ID:', socket.id, 'User:', name);
     });
 
     socket.on('player_list_updated', (data) => {
@@ -66,7 +73,11 @@ function initSocket() {
     });
 
     socket.on('error_msg', (msg) => {
-      alert(`Notice: ${msg}`);
+      if (typeof setGameStatus === 'function') {
+        setGameStatus(`⚠️ ${msg}`);
+      } else {
+        alert(`Notice: ${msg}`);
+      }
     });
 
   } catch (e) {

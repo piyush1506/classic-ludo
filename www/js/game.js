@@ -559,8 +559,13 @@ function handleVictory(winnerColor) {
   clearInterval(turnTimer);
   sounds.playWin();
 
+  // If online match, notify server for verified reward & cloud save
+  if (isOnlineMatch && typeof socket !== 'undefined' && socket) {
+    socket.emit('player_won', { playerColor: winnerColor });
+  }
+
   // If user won, award coins
-  if (!isVsComputer || winnerColor === userColor) {
+  if (!isVsComputer || winnerColor === userColor || (isOnlineMatch && winnerColor === myOnlineColor)) {
     userState.coins += potAmount;
     saveUserState();
     $('#win-prize-txt').textContent = `+${potAmount.toLocaleString()} Coins Won! 💰`;
