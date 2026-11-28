@@ -107,7 +107,7 @@ function renderLobbyPlayers(players) {
       <div style="display:flex; align-items:center; gap:8px;">
         <span style="font-size:16px;">${p.flag || '🇮🇳'}</span>
         <span style="width:14px; height:14px; border-radius:50%; background:${col}; border:1.5px solid #fff;"></span>
-        <span style="font-size:13px; font-weight:800; color:#fff;">${p.name} ${p.isHost ? '👑' : ''}${p.isBot ? ' 🤖' : ''}</span>
+        <span style="font-size:13px; font-weight:800; color:#fff;">${p.name} ${p.isHost ? '👑' : ''}</span>
       </div>
       <span style="font-size:11px; color:#ffd700; font-weight:700;">${p.colorName}</span>
     `;
@@ -118,7 +118,7 @@ function renderLobbyPlayers(players) {
   const waitingTxt = $('#room-waiting-txt');
   if (isRoomHost) {
     startBtn.style.display = 'block';
-    startBtn.textContent = players.length < 2 ? 'START MATCH (ADD BOTS)' : `START MATCH (${players.length} Players)`;
+    startBtn.textContent = players.length < 2 ? 'START MATCH' : `START MATCH (${players.length} Players)`;
     waitingTxt.style.display = 'none';
   } else {
     startBtn.style.display = 'none';

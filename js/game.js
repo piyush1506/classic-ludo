@@ -110,7 +110,7 @@ function buildBoard() {
 // ================= GAME MATCH ENGINE =================
 let numPlayers = 4;
 let activePlayers = [0, 1, 2, 3]; // colors playing
-let isVsComputer = true;
+let isVsComputer = false;
 let userColor = 0; // default Red
 let currentTurnIdx = 0; // index into activePlayers
 let diceVal = 1;
@@ -238,7 +238,7 @@ function updatePlayerPanels() {
         if (avatarEl && found.avatar) avatarEl.textContent = found.avatar;
       }
     } else if (isVsComputer) {
-      if (nameEl) nameEl.textContent = p === userColor ? `${userState.name} (You)` : `Bot ${COLOR_NAMES[p]}`;
+      if (nameEl) nameEl.textContent = p === userColor ? `${userState.name} (You)` : `${COLOR_NAMES[p]} Player`;
       if (flagEl) flagEl.textContent = p === userColor ? '🇮🇳 India' : ['🇮🇳 India', '🇺🇸 USA', '🇬🇧 UK', '🇦🇺 Aus'][p];
       if (coinsEl) coinsEl.textContent = `💰 ${(10000 + p * 2500).toLocaleString()}`;
       if (avatarEl) avatarEl.textContent = ['👑', '🌻', '👩', '🦁'][p];
@@ -846,13 +846,15 @@ document.addEventListener('DOMContentLoaded', () => {
   drawWheel();
 
   // Lobby Mode Clicks
-  $('#btn-mode-computer').onclick = () => {
-    sounds.playClick();
-    isVsComputer = true;
-    $('#modal-mode-title').textContent = 'VS COMPUTER';
-    $('#sec-your-color').style.display = 'flex';
-    $('#modal-mode').classList.add('active');
-  };
+  if ($('#btn-mode-computer')) {
+    $('#btn-mode-computer').onclick = () => {
+      sounds.playClick();
+      isVsComputer = true;
+      $('#modal-mode-title').textContent = 'PASS N PLAY';
+      $('#sec-your-color').style.display = 'flex';
+      $('#modal-mode').classList.add('active');
+    };
+  }
 
   $('#btn-mode-local').onclick = () => {
     sounds.playClick();

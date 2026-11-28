@@ -359,7 +359,7 @@ function fillRoomWithBotsAndStart(roomCode) {
 
   requiredColors.forEach((col, idx) => {
     if (!usedColors.includes(col)) {
-      const botProfile = availableBots[idx % availableBots.length] || { name: `Player ${col + 1}`, flag: '🌍', country: 'Global', avatar: '🤖' };
+      const botProfile = availableBots[idx % availableBots.length] || { name: `Player ${col + 1}`, flag: '🌍', country: 'Global', avatar: '👑' };
       const botPlayer = {
         userId: `bot_${col}_${Date.now()}`,
         id: `bot_${col}_${Date.now()}`,
