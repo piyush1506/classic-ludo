@@ -454,4 +454,11 @@ document.addEventListener('DOMContentLoaded', () => {
     sounds.playClick();
     $('#modal-online').classList.remove('active');
   };
+
+  if ($('#btn-close-online-x')) {
+    $('#btn-close-online-x').onclick = () => {
+      sounds.playClick();
+      $('#modal-online').classList.remove('active');
+    };
+  }
 });

@@ -10,6 +10,11 @@
 
   <!-- ================= LOBBY / MAIN MENU ================= -->
   <div id="lobby-screen" class="screen active">
+    <!-- Decorative Royal Background Swooshes & Watermarks -->
+    <div class="royal-bg-swoosh"></div>
+    <div class="royal-watermark wm-dice-1">🎲</div>
+    <div class="royal-watermark wm-crown-1">👑</div>
+
     <!-- Top Bar -->
     <header class="lobby-header">
       <div class="user-profile" id="btn-profile">
@@ -19,60 +24,92 @@
         </div>
         <div class="user-meta">
           <div class="user-flag-row">
+            <span class="status-dot-online"></span>
             <span class="flag-icon" id="user-flag">🇮🇳</span>
-            <span class="user-name" id="lobby-username">Rohan J.</span>
+            <span class="user-name" id="lobby-username">Guest 3417</span>
           </div>
-          <span class="user-title">👑 Pro Champion</span>
+          <span class="user-title">Guest Player (Tap to Login)</span>
         </div>
       </div>
 
-      <div class="currency-group">
-        <div class="currency-pill coin-pill">
-          <span class="curr-icon">💰</span>
-          <span class="curr-val" id="user-coins">12,395</span>
-          <button class="add-curr-btn">+</button>
+      <div class="header-right-tools">
+        <div class="currency-group">
+          <div class="currency-pill coin-pill">
+            <span class="curr-icon">🪙</span>
+            <span class="curr-val" id="user-coins">10,000</span>
+            <button class="add-curr-btn" title="Add Coins">+</button>
+          </div>
+          <div class="currency-pill gem-pill">
+            <span class="curr-icon">💎</span>
+            <span class="curr-val" id="user-gems">50</span>
+            <button class="add-curr-btn" title="Add Gems">+</button>
+          </div>
         </div>
-        <div class="currency-pill gem-pill">
-          <span class="curr-icon">💎</span>
-          <span class="curr-val" id="user-gems">798</span>
-          <button class="add-curr-btn">+</button>
+
+        <div class="header-action-icons">
+          <button class="icon-btn-royal has-badge" id="btn-notify" aria-label="Notifications">🔔<span class="red-dot-badge"></span></button>
+          <button class="icon-btn-royal" id="btn-gift" aria-label="Daily Gift">🎁</button>
+          <button class="icon-btn-royal" id="btn-trophy" aria-label="Leaderboard">🏆</button>
+          <button class="icon-btn-royal" id="btn-settings" aria-label="Settings">⚙️</button>
         </div>
       </div>
-
-      <button class="icon-btn-gold" id="btn-settings" aria-label="Settings">⚙️</button>
     </header>
 
     <!-- Main Branding -->
     <div class="hero-brand">
-      <div class="crown-icon">👑</div>
-      <h1 class="game-logo">LUDO <span class="logo-gold">KING</span></h1>
-      <p class="logo-tagline">THE ULTIMATE REALTIME BOARD GAME</p>
+      <div class="crown-icon-wrap">
+        <svg class="royal-crown-svg" viewBox="0 0 80 50" width="64" height="40">
+          <defs>
+            <linearGradient id="crownGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff59d"/>
+              <stop offset="50%" stop-color="#ffc107"/>
+              <stop offset="100%" stop-color="#b26a00"/>
+            </linearGradient>
+          </defs>
+          <path d="M10 42 L5 14 L24 27 L40 6 L56 27 L75 14 L70 42 Z" fill="url(#crownGold)" stroke="#ffe082" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="5" cy="12" r="4" fill="#fff59d"/>
+          <circle cx="40" cy="5" r="5" fill="#fff59d"/>
+          <circle cx="75" cy="12" r="4" fill="#fff59d"/>
+          <rect x="10" y="38" width="60" height="7" rx="3" fill="#ff8f00" stroke="#ffe082" stroke-width="1"/>
+          <circle cx="40" cy="30" r="3.5" fill="#e53935"/>
+          <circle cx="24" cy="33" r="2.5" fill="#1e88e5"/>
+          <circle cx="56" cy="33" r="2.5" fill="#43a047"/>
+        </svg>
+      </div>
+      <div class="logo-wreath-row">
+        <span class="laurel laurel-left">🌿</span>
+        <h1 class="game-logo">LUDO <span class="logo-gold">KING</span></h1>
+        <span class="laurel laurel-right">🌿</span>
+      </div>
+      <div class="royal-ribbon-wrap">
+        <span class="logo-tagline">THE ULTIMATE REALTIME BOARD GAME</span>
+      </div>
     </div>
 
     <!-- Game Mode Cards Grid -->
     <div class="mode-grid">
-      <!-- 1. ONLINE MULTIPLAYER (FEATURED) -->
+      <!-- 1. ONLINE MULTIPLAYER (FEATURED GREEN CAPSULE) -->
       <button class="mode-card card-online featured-card" id="btn-mode-online">
-        <div class="card-badge pulse-badge">LIVE ⚡</div>
-        <div class="card-icon">🌐</div>
+        <div class="hot-ribbon">🔥 HOT</div>
+        <div class="card-icon-circle">🌐</div>
         <div class="card-text">
           <h3>PLAY ONLINE</h3>
           <p>Realtime Matchmaking with Online Players</p>
         </div>
-        <span class="card-arrow">▶</span>
+        <span class="card-play-tri">▶</span>
       </button>
 
-      <!-- 2. PASS N PLAY -->
+      <!-- 2. PASS N PLAY (PURPLE CAPSULE) -->
       <button class="mode-card card-local" id="btn-mode-local">
-        <div class="card-icon">👥</div>
+        <div class="card-icon-circle">👥</div>
         <div class="card-text">
           <h3>PASS N PLAY</h3>
           <p>2 to 4 Players on Same Device</p>
         </div>
-        <span class="card-arrow">▶</span>
+        <span class="card-play-tri">▶</span>
       </button>
 
-      <!-- 4. MINI GAMES ROW -->
+      <!-- 3. MINI GAMES ROW -->
       <div class="mini-games-row">
         <button class="mini-card card-spin" id="btn-mode-spin">
           <span class="mini-icon">🎡</span>
@@ -83,13 +120,30 @@
           <span class="mini-label">7 Up 7 Down</span>
         </button>
       </div>
+
+      <!-- Lobby Footer Pills -->
+      <footer class="lobby-footer">
+        <button class="footer-btn" id="btn-sound-toggle">🔊 Sound: ON</button>
+        <button class="footer-btn" id="btn-rules">📖 Rules</button>
+      </footer>
     </div>
 
-    <!-- Lobby Footer -->
-    <footer class="lobby-footer">
-      <button class="footer-btn" id="btn-sound-toggle">🔊 Sound: ON</button>
-      <button class="footer-btn" id="btn-rules">📜 Rules</button>
-    </footer>
+    <!-- Decorative 3D Corner Artwork -->
+    <div class="lobby-3d-decor" aria-hidden="true">
+      <div class="mini-3d-board">
+        <div class="m3d-quad m3d-blue"></div>
+        <div class="m3d-quad m3d-red"></div>
+        <div class="m3d-quad m3d-yellow"></div>
+        <div class="m3d-quad m3d-green"></div>
+        <div class="m3d-center">👑</div>
+      </div>
+      <div class="decor-pawn dp-blue"></div>
+      <div class="decor-pawn dp-red"></div>
+      <div class="decor-pawn dp-yellow"></div>
+      <div class="decor-pawn dp-green"></div>
+      <div class="decor-die dd-1">⚄</div>
+      <div class="decor-die dd-2">⚂</div>
+    </div>
   </div>
 
 
@@ -284,65 +338,94 @@
 
   <!-- ================= PLAY ONLINE OPTIONS MODAL ================= -->
   <div id="modal-online" class="modal-overlay">
-    <div class="modal-card online-card">
-      <h2 class="modal-title">🌐 PLAY ONLINE</h2>
+    <div class="modal-card online-card royal-modal-card">
+      <button class="modal-close-x" id="btn-close-online-x" aria-label="Close">✕</button>
+
+      <div class="online-header-wreath">
+        <span class="laurel laurel-sm">🌿</span>
+        <span class="online-globe-badge">🌐</span>
+        <h2 class="modal-title royal-online-title">PLAY <span class="gold-txt">ONLINE</span></h2>
+        <span class="laurel laurel-sm laurel-right">🌿</span>
+      </div>
+      <div class="title-glow-line"></div>
       
       <!-- Sub tabs -->
-      <div class="seg-ctrl" id="online-tabs">
-        <button class="seg-btn active" data-tab="tab-quick">Quick Match</button>
-        <button class="seg-btn" data-tab="tab-create">Create Room</button>
-        <button class="seg-btn" data-tab="tab-join">Join Room</button>
+      <div class="seg-ctrl royal-tabs" id="online-tabs">
+        <button class="seg-btn active" data-tab="tab-quick">🚀 Quick Match</button>
+        <button class="seg-btn" data-tab="tab-create">👥 Create Room</button>
+        <button class="seg-btn" data-tab="tab-join">🔗 Join Room</button>
       </div>
 
       <!-- Tab 1: Quick Match -->
       <div class="online-tab-content active" id="tab-quick">
-        <p class="modal-subtitle" style="margin-top:6px;">Auto-matches with online players in real-time</p>
-        <div class="modal-section" style="margin-top:12px;">
-          <label>Select Mode:</label>
-          <div class="seg-ctrl" id="seg-quick-players">
-            <button data-val="2" class="seg-btn">2 Players</button>
-            <button data-val="3" class="seg-btn">3 Players</button>
-            <button data-val="4" class="seg-btn active">4 Players</button>
+        <div class="divider-subtitle">
+          <span>Auto-matches with online players in real-time</span>
+        </div>
+
+        <div class="royal-inner-box">
+          <div class="modal-section">
+            <label>👥 Select Mode:</label>
+            <div class="seg-ctrl royal-mode-pills" id="seg-quick-players">
+              <button data-val="2" class="seg-btn checkable-pill">👥 2 Players <span class="check-badge">✓</span></button>
+              <button data-val="3" class="seg-btn checkable-pill">👥 3 Players <span class="check-badge">✓</span></button>
+              <button data-val="4" class="seg-btn checkable-pill active">👥 4 Players <span class="check-badge">✓</span></button>
+            </div>
+          </div>
+
+          <div class="modal-section" style="margin-top:12px;">
+            <label>🪙 Entry Fee:</label>
+            <div class="bet-row royal-bet-row">
+              <button class="bet-chip checkable-pill active" data-bet="500">🪙 500 <span class="check-badge">✓</span></button>
+              <button class="bet-chip checkable-pill" data-bet="1000">🪙 1,000 <span class="check-badge">✓</span></button>
+              <button class="bet-chip checkable-pill" data-bet="2500">🪙 2,500 <span class="check-badge">✓</span></button>
+            </div>
           </div>
         </div>
-        <div class="modal-section" style="margin-top:10px;">
-          <label>Entry Fee:</label>
-          <div class="bet-row">
-            <button class="bet-chip active" data-bet="500">💰 500</button>
-            <button class="bet-chip" data-bet="1000">💰 1,000</button>
-            <button class="bet-chip" data-bet="2500">💰 2,500</button>
-          </div>
-        </div>
-        <button class="btn-gold" id="btn-start-quick" style="margin-top:16px; width:100%;">FIND MATCH NOW</button>
+
+        <button class="btn-gold royal-cta-pill" id="btn-start-quick">
+          <span class="cta-play-circle">▶</span> FIND MATCH NOW
+        </button>
       </div>
 
       <!-- Tab 2: Create Private Room -->
       <div class="online-tab-content" id="tab-create" style="display:none;">
-        <p class="modal-subtitle" style="margin-top:6px;">Invite your friends via Room Code</p>
-        <div class="modal-section" style="margin-top:12px;">
-          <label>Max Players:</label>
-          <div class="seg-ctrl" id="seg-create-players">
-            <button data-val="2" class="seg-btn">2</button>
-            <button data-val="3" class="seg-btn">3</button>
-            <button data-val="4" class="seg-btn active">4</button>
+        <div class="divider-subtitle">
+          <span>Invite your friends via Room Code</span>
+        </div>
+        <div class="royal-inner-box">
+          <div class="modal-section">
+            <label>👥 Max Players:</label>
+            <div class="seg-ctrl royal-mode-pills" id="seg-create-players">
+              <button data-val="2" class="seg-btn checkable-pill">👥 2 <span class="check-badge">✓</span></button>
+              <button data-val="3" class="seg-btn checkable-pill">👥 3 <span class="check-badge">✓</span></button>
+              <button data-val="4" class="seg-btn checkable-pill active">👥 4 <span class="check-badge">✓</span></button>
+            </div>
+          </div>
+          <div class="modal-section" style="margin-top:12px;">
+            <label>🪙 Bet Coins:</label>
+            <div class="bet-row royal-bet-row">
+              <button class="bet-chip checkable-pill active" data-bet="500">🪙 500 <span class="check-badge">✓</span></button>
+              <button class="bet-chip checkable-pill" data-bet="1000">🪙 1,000 <span class="check-badge">✓</span></button>
+              <button class="bet-chip checkable-pill" data-bet="2500">🪙 2,500 <span class="check-badge">✓</span></button>
+            </div>
           </div>
         </div>
-        <div class="modal-section" style="margin-top:10px;">
-          <label>Bet Coins:</label>
-          <div class="bet-row">
-            <button class="bet-chip active" data-bet="500">💰 500</button>
-            <button class="bet-chip" data-bet="1000">💰 1,000</button>
-            <button class="bet-chip" data-bet="2500">💰 2,500</button>
-          </div>
-        </div>
-        <button class="btn-gold" id="btn-create-room" style="margin-top:16px; width:100%;">CREATE ROOM</button>
+        <button class="btn-gold royal-cta-pill" id="btn-create-room">
+          <span class="cta-play-circle">▶</span> CREATE ROOM
+        </button>
       </div>
 
       <!-- Tab 3: Join Room -->
       <div class="online-tab-content" id="tab-join" style="display:none;">
-        <p class="modal-subtitle" style="margin-top:6px;">Enter 4-character Room Code</p>
-        <input type="text" id="input-room-code" maxlength="4" placeholder="e.g. A7X9" style="text-transform:uppercase; font-size:24px; font-weight:900; letter-spacing:6px; text-align:center; padding:12px; border-radius:12px; border:2px solid #ffd700; background:#000; color:#fff; width:100%; margin:14px 0;">
-        <button class="btn-gold" id="btn-join-room" style="width:100%;">JOIN ROOM</button>
+        <div class="divider-subtitle">
+          <span>Enter 4-character Room Code</span>
+        </div>
+        <div class="royal-inner-box">
+          <input type="text" id="input-room-code" maxlength="4" placeholder="e.g. A7X9" style="text-transform:uppercase; font-size:24px; font-weight:900; letter-spacing:6px; text-align:center; padding:12px; border-radius:12px; border:2px solid #ffd700; background:rgba(0,0,0,0.6); color:#fff; width:100%;">
+        </div>
+        <button class="btn-gold royal-cta-pill" id="btn-join-room">
+          <span class="cta-play-circle">▶</span> JOIN ROOM
+        </button>
       </div>
 
       <!-- Room Waiting Lobby View -->
@@ -351,11 +434,25 @@
         <p style="font-size:12px; color:#bbb; margin:6px 0;">Share code with your friends</p>
         <div id="room-player-list" style="display:flex; flex-direction:column; gap:6px; margin:10px 0; max-height:140px; overflow-y:auto; background:rgba(0,0,0,0.3); padding:8px; border-radius:8px;">
         </div>
-        <button class="btn-gold" id="btn-start-room-match" style="display:none; width:100%;">START MATCH</button>
+        <button class="btn-gold royal-cta-pill" id="btn-start-room-match" style="display:none;">
+          <span class="cta-play-circle">▶</span> START MATCH
+        </button>
         <p id="room-waiting-txt" style="font-size:13px; color:#ffca28;">Waiting for friends to join...</p>
       </div>
 
-      <button class="btn-cancel" id="btn-close-online" style="margin-top:10px;">Close</button>
+      <button class="btn-close-pill" id="btn-close-online">✕ Close</button>
+
+      <!-- Bottom Corner Decorative Pawns & Dice -->
+      <div class="modal-corner-decor left-decor" aria-hidden="true">
+        <span class="mini-pawn mp-blue"></span>
+        <span class="mini-pawn mp-red"></span>
+        <span class="mini-die">⚄</span>
+      </div>
+      <div class="modal-corner-decor right-decor" aria-hidden="true">
+        <span class="mini-die">⚂</span>
+        <span class="mini-pawn mp-green"></span>
+        <span class="mini-pawn mp-yellow"></span>
+      </div>
     </div>
   </div>
 

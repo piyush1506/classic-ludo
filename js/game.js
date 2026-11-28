@@ -1015,6 +1015,48 @@ window.showReaction = showReaction;
   });
 
   $('#btn-rules').onclick = () => {
+    sounds.playClick();
     alert("👑 LUDO KING RULES:\n\n1. Roll a 6 to bring a pawn out of home.\n2. Rolling 6, capturing an opponent's pawn, or reaching home grants an EXTRA ROLL.\n3. Safe squares marked with Stars (★) protect your pawns from capture.\n4. Three consecutive 6s will forfeit your turn.\n5. The first player to bring all 4 pawns to the center wins the match!");
   };
+
+  // Royal Header Tools
+  if ($('#btn-gift')) {
+    $('#btn-gift').onclick = () => {
+      sounds.playClick();
+      const today = new Date().toDateString();
+      if (localStorage.getItem('lk_daily_gift') === today) {
+        alert('🎁 Daily Gift already claimed today! Come back tomorrow or spin the Lucky Wheel!');
+      } else {
+        localStorage.setItem('lk_daily_gift', today);
+        userState.coins += 500;
+        saveUserState();
+        sounds.playWin();
+        alert('🎁 Daily Reward Claimed: +500 Coins added to your balance!');
+      }
+    };
+  }
+
+  if ($('#btn-notify')) {
+    $('#btn-notify').onclick = () => {
+      sounds.playClick();
+      const badge = $('#btn-notify .red-dot-badge');
+      if (badge) badge.style.display = 'none';
+      alert('🔔 Welcome to Ludo King! Realtime online matchmaking is live.');
+    };
+  }
+
+  if ($('#btn-trophy')) {
+    $('#btn-trophy').onclick = () => {
+      sounds.playClick();
+      alert(`🏆 YOUR PROFILE STATS\n\nPlayer: ${userState.name}\nBalance: ${userState.coins.toLocaleString()} Coins\nGems: ${userState.gems.toLocaleString()}`);
+    };
+  }
+
+  $$('.add-curr-btn').forEach(btn => {
+    btn.onclick = () => {
+      sounds.playClick();
+      drawWheel();
+      $('#modal-spin').classList.add('active');
+    };
+  });
 });
